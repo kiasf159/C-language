@@ -1,5 +1,5 @@
 #include<stdio.h>
-#pragma warning(disable:4996) // scanfÀÇ ¿À·ù¸¦ ÇØ°áÇÏ±â À§ÇÑ pragma
+#pragma warning(disable:4996) // scanfì˜ ì˜¤ë¥˜ë¥¼ í•´ê²°í•˜ê¸° ìœ„í•œ pragma
 
 int main()
 {
@@ -7,9 +7,9 @@ int main()
 	int tmp = 0; int result = 0;
 	int binary[50];
 	
-	printf("Á¤¼ö¸¦ ÀÔ·ÂÇÏ½Ã¿À : ");
+	printf("ì •ìˆ˜ë¥¼ ì…ë ¥í•˜ì‹œì˜¤ : ");
 	scanf("%d", &number);
-	printf("ÀÓÀÇ ºñÆ® ¼ö¸¦ ÀÔ·Â¹Ş½À´Ï´Ù. (Á¤¼ö°ª) : ");
+	printf("ì„ì˜ ë¹„íŠ¸ ìˆ˜ë¥¼ ì…ë ¥ë°›ìŠµë‹ˆë‹¤. (ì •ìˆ˜ê°’) : ");
 	scanf("%d", &bit);
 	tmp = number << bit;
 	result = tmp ^ number;
@@ -26,7 +26,7 @@ int main()
 		}
 	}
 
-	printf("XOR ¿¬»ê °á°ú(ÀÌÁø¼ö) : ");
+	printf("XOR ì—°ì‚° ê²°ê³¼(ì´ì§„ìˆ˜) : ");
 
 	for (int i = j - 1; i >= 0; i--)
 	{
@@ -37,11 +37,11 @@ int main()
 
 	if ((tmp ^ number) == 0)
 	{
-		printf("ºñÆ®°¡ °ËÃâµÇÁö ¾Ê¾Ò½À´Ï´Ù.\n");
+		printf("ë¹„íŠ¸ê°€ ê²€ì¶œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.\n");
 	}
 	else
 	{
-		printf("ºñÆ®°¡ °ËÃâµÇ¾ú½À´Ï´Ù.\n");
+		printf("ë¹„íŠ¸ê°€ ê²€ì¶œë˜ì—ˆìŠµë‹ˆë‹¤.\n");
 	}
 	return 0;
 }
