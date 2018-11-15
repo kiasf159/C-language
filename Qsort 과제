@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+
+int compare(const void *a, const void *b)
+{
+	return strcmp((char *)a, (char*)b);
+}
+
+int main() {
+	char str[6][15] = { "apple" , "grape" , "jujube", "pear", "grapefruit", "chestnut" };
+	char tmp[15];
+	qsort((void*)str,6,sizeof(str[0]),compare);
+	for (int i = 0; i<6; i++) // 6을 모두 #define 으로 묶고 해도 무방함.
+		printf("%s\n", str[i]);
+	return 0;
+}
