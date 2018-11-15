@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#pragma warning(disable:4996)
+int main()
+{
+	char *str = (char*)malloc(sizeof(char) * 100);
+	char *str2 = (char*)calloc(100, sizeof(char)); 
+  //malloc을 쓰면 garbage 값이 들어가 있으므로 memset을 이용해 초기화를 하지만 calloc은 애초에 초기화가 됨.
+	//str2 배열을 memset을 이용해 초기화
+	char *pch;
+	int len;
+	printf("문자열을 입력하세요 : ");
+	scanf("%s", str);
+	len = strlen(str); 
+	pch = &str[len - 1];
+	// 기존 strcpy 삭제 6-5-17
+	while (len > 0)
+	{
+		strncat(str2, pch, 1);
+		pch--;
+		len--;
+	}
+	printf("거꾸로 만든 문자열 : %s\n\n", str2);
+	if (strcmp(str, str2) == 0)
+		printf("대칭 문자열이 맞습니다. \n");
+	else
+		printf("대칭 문자열이 아닙니다. \n");
+	free(str);
+	free(str2);
+	return 0;
+}
