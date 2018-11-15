@@ -1,0 +1,62 @@
+#include<stdio.h>
+#include<string.h>
+#pragma warning(disable:4996) // scanf의 오류를 해결하기 위한 pragma
+
+
+int main()
+{
+	double price = 0; double usage = 0;
+	char letter[10]; char low[] = "저압"; char high[] = "고압";
+
+	printf("사용량을 입력하세요(kWh) : ");
+	scanf("%lf", &usage);
+	printf("주택용 저압, 주택용 고압 중 선택해주세요.(저압, 고압으로 입력) : ");
+	scanf("%s", letter);
+
+	if (strcmp(letter, high) == 0)
+	{
+		if (usage <= 200)
+		{
+			price = 730 + 78.3*usage;
+			price = price - 2500; // 200kWh 이하 사용시 월 2,500원 한도 감액
+			if (price < 1000)
+			{
+				price = 1000; //최저요금 1,000원
+			}
+		}
+		else if (usage <= 400)
+		{
+			price = 1260 + 147.3*usage;
+		}
+		else
+		{
+			price = 6060 + 215.6*usage;
+		}
+		printf("전기 사용 요금은 : %lf입니다.\n", price);
+	}
+	else if (strcmp(letter, low) == 0)
+	{
+		if (usage <= 200)
+		{
+			price = 910 + 93.3*usage;
+			price = price - 4000; // 200kWh 이하 사용시 월 4,000원 한도 감액
+			if (price < 1000)
+			{
+				price = 1000; //최저요금 1,000원
+			}
+		}
+		else if (usage <= 400)
+		{
+			price = 1600 + 187.9*usage;
+		}
+		else 
+		{
+			price = 7300 + 280.6*usage;
+		}
+		printf("전기 사용 요금은 : %lf입니다.\n", price);
+	}
+	else
+	{
+		printf("\"고압\" 또는 \"저압\"으로 입력해주세요.\n");
+	}
+}
