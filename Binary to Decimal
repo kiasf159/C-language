@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<stdlib.h>
+#pragma warning(disable:4996) //scanf Error
+
+int main()
+{
+	 int *number = (int *)malloc(sizeof(int));
+	 int sum = 0, two = 1;
+	 /* int *p; 
+	    p = &sum; */
+
+	printf("2진수를 입력하시오(32자리 이하) :");
+	scanf("%d", number);
+	printf("\n\n");
+	printf("%d = ", *number);
+	while (*number > 0)
+	{
+		if (*number % 2)//If number is even number, value = 0
+		{
+			sum = sum + two;
+		}
+		two = two * 2;
+		*number = *number / 10;
+	}
+	printf("%d\n", sum);
+	free(number);
+	return 0;
+}
