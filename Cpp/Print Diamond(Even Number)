@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int i, j, k, number;
+	cout << "Write Number : "; //print line as number
+	cin >> number;
+	for (i = 1; i <= number; i++)
+	{
+		for (j = 1; j < number-i; j++)
+		{
+			cout << " ";
+		}
+		for (k = 1; k < 2 * i - 1; k++)
+		{
+			cout << "*";
+		}
+		cout << "\n";
+	}
+	for (i = number - 1; i > 0; i--) //print for diamond
+	{
+		for (j = 1; j < number - i; j++)
+		{
+			cout << " ";
+		}
+		for (k = 1; k < 2 * i - 1; k++)
+		{
+			cout << "*";
+		}
+		cout << "\n";
+	}
+}
