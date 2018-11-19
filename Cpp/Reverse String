@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+int main()
+{
+	int temp;
+	char str1[50], str2[50];
+	memset(str1, NULL, 50);
+	memset(str2, NULL, 50);
+	char *p;
+
+	cout << "Input String : ";
+	cin >> str1;
+	cout << "Original String : " << str1 << "\n";
+
+	temp = strlen(str1);
+	p = &str1[temp - 1];
+
+	for (int i = 0; i < temp; i++)
+	{
+		str2[i] = *p;
+		p--;
+	}
+	cout << "Reverse String : " << str2 << "\n";
+}
