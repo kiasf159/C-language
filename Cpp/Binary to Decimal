@@ -1,0 +1,23 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+int main()
+{
+	char a[20];
+	int i = 0, j, mul = 1, sum = 0;
+
+	cout << "Input Binary Number : ";
+	cin >> a;
+	j = strlen(a);
+	while (j)
+	{
+		if (a[j-1] == '1')
+		{
+			sum = sum + mul;
+		}
+		mul = mul * 2;
+		j--;
+	}
+	cout << sum << "\n";
+}
