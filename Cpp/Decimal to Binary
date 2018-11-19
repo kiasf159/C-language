@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+int main()
+{
+	int number;
+	int str[16] = { 0 };
+	cout << "Input Binary Number : ";
+	cin >> number;
+	cout << number << " : ";
+	if (number == 0 || number == 1)
+	{
+		cout << number << "\n";
+		return 0;
+	}
+	for (int i = 0 ;  ; i++)
+	{
+		str[i] = number % 2;
+		number = number / 2;
+		if (number == 0)
+		{
+			break;
+		}
+	}
+	for (int j = 16 - 1; j >= 0; j--)
+	{
+		cout << str[j];
+	}
+	cout << "\n";
+}
