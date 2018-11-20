@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int x = 555;
+
+void print_x(void)
+{
+	cout << "x => " << x << "\n";
+}
+int main()
+{
+	cout << "x => " << x << "\n";
+	int x = 333;
+	cout << "x => " << x << "\n";
+	for (int i = 0; i < 5; i++) // Block Scope
+	{
+		int x = i * 100;
+		cout << "x => " << x << "\n";
+	}
+	cout << "x => " << x << "\n";
+	cout << "::x => " << ::x << "\n";
+	print_x();
+}
