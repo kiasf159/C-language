@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int sum = 0;
+
+int add(int x)
+{
+	if (x == 0)
+	{
+		return 0;
+	}
+	cout << "x = " << x << "\n";
+	sum = sum + x;
+	cout << "sum = " << sum << "\n";
+	return(add(x - 1));
+}
+
+int main()
+{
+	int x;
+	cout << "Input Number : ";
+	cin >> x;
+	add(x);
+}
