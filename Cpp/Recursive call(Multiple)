@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int temp = 1;
+
+int factorial(int x)
+{
+	if (x == 1)
+	{
+		return temp;
+	}
+	temp = temp * x;
+	return factorial(x - 1);
+}
+
+int main()
+{
+	int number;
+	int fac;
+	cout << "Input Number : ";
+	cin >> number;
+	fac = factorial(number);
+	cout << number << "! = " << fac << "\n";
+}
