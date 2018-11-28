@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+#define NAME_LENGTH 20
+#define SEX_LENGTH 20
+#define JOB_LENGTH 20
+
+class Kai
+{
+private:
+	char name[NAME_LENGTH];
+	char sex[SEX_LENGTH];
+	char job[JOB_LENGTH];
+	int age;
+	bool marriage;
+public:
+	void introduce()
+	{
+		cout << "Name : " << name << endl;
+		cout << "Sex : " << sex << endl;
+		cout << "Job : " << job << endl;
+		cout << "Age : " << age << endl;
+		cout << "Marriage : " << marriage << endl;
+	}
+	void eat(const char *food)
+	{
+		cout << "He eats " << food;
+	}
+	void sleep()
+	{
+		cout << "He is sleeping (zzz)" << endl;
+	}
+	void drive(const char *destination)
+	{
+		cout << "He drives to " << destination << endl;
+	}
+	void constructor(const char *name, const char *sex, const char *job, int age, bool marriage)
+	{
+		strcpy_s(this->name, name);
+		strcpy_s(this->sex, sex);
+		strcpy_s(this->job, job);
+		this->age = age;
+		this->marriage = marriage;
+	}
+	void read();
+}kai;
+int main(void)
+{
+	kai.constructor("Kai", "Male", "Consultant", 28, false);
+	kai.introduce();
+	cout << endl;
+	kai.read();
+	kai.drive("Gangnam, Seoul");
+	
+	return 0;
+}
+void Kai::read()
+{
+	cout << "He is reading a book" << endl;
+}
