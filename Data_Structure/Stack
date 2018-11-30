@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning (disable:4996)
+#define MAX_STACK_SIZE 100 // Size of Array
+typedef int Element;
+
+Element data[MAX_STACK_SIZE];
+int top; // top of stack
+
+void error(char str[])
+{
+	printf("%s\n", str);
+	exit(1);
+}
+
+//main operate of stack
+void init_stack()
+{
+	top = -1;
+}
+int is_empty()
+{
+	return top == -1;
+}
+int is_full()
+{
+	return top == MAX_STACK_SIZE - 1;
+}
+int size()
+{
+	return top + 1;
+}
+
+void push(Element e)
+{
+	if (is_full())
+	{
+		error("The Stack is Full!\n");
+	}
+	data[++top] = e;
+}
+Element pop()
+{
+	if (is_empty())
+	{
+		error("The Stack is Empty!\n");
+	}
+	return data[top--];
+}
+Element peek()
+{
+	if (is_empty())
+	{
+		error("The Stack is Empty!\n");
+	}
+	return data[top];
+}
+
+//The code for Stack Test
+void print_stack(char msg[])
+{
+	int i;
+	printf("%s[%2d]= ", msg, size());
+	for (i = 0; i < size(); i++)
+	{
+		printf("%2d ", data[i]);
+	}
+	printf("\n");
+}
+
+void main()
+{
+	int temp = 0;
+	int push_number = 0;
+	int pop_number = 0;
+	int i;
+	init_stack();
+	printf("How much to put in : ");
+	scanf_s("%d", &push_number);
+	for (i = 1; i <= push_number; i++)
+	{
+		printf("Input Number : ");
+		scanf_s("%d", &temp);
+		push(temp);
+	}
+	print_stack("Stack push result :");
+	printf("How much to pull out : ");
+	scanf_s("%d", &pop_number);
+	for (i = 1; i <= pop_number; i++)
+	{
+		printf("\tpop(delete) : %d\n", pop());
+	}
+	print_stack("Stack pop result :");
+}
