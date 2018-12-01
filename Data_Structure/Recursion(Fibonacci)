@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+int fib(int n)
+{
+	int i, tmp, current, last;
+	if (n < 2)
+		return n;
+	else
+	{
+		last = 0;
+		current = 1; //Start 1, 1
+		for (i = 2; i <= n; i++)
+		{
+			tmp = current;
+			current = current + last;
+			last = tmp;
+		}
+		return current;
+	}
+}
+
+int main()
+{
+	int number1 = 0, number2 = 0;
+	printf("Input Number : ");
+	scanf_s("%d", &number1);
+	number2 = fib(number1);
+	printf("Result : %d\n", number2);
+}
