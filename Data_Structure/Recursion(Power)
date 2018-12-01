@@ -1,0 +1,20 @@
+#include<stdio.h>
+
+double power(double x, int n)
+{
+	if (n == 1)
+		return x;
+	else if (n % 2 == 0)
+		return power(x*x, n / 2);
+	else
+		return x*power(x*x, (n - 1 )/ 2);
+}
+
+int main()
+{
+	double number = 0;
+	printf("Input Number : ");
+	scanf_s("%lf", &number);
+	number = power(number, 5); // Change 2nd variable
+	printf("%lf\n", number);
+}
