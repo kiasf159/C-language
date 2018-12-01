@@ -1,5 +1,6 @@
 # C-language
-In this repository I'll add all of my data structures implementations.
+
+In this repository I'll add all of C code, C++ code, data structures implementations.
 
 ## Used C programming, Visual Studio 2017
 
