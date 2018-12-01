@@ -1,0 +1,155 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int Element;
+typedef struct DLinkedNode {
+	Element data;
+	struct DLinkedNode* prev;
+	struct DLinkedNode* next;
+}Node;
+Node org;
+
+void init_list()
+{
+	org.next = NULL;
+}
+Node* get_head()
+{
+	return org.next;
+}
+Element is_empty()
+{
+	return get_head() == NULL;
+}
+
+Node* get_entry(int pos)
+{
+	Node* n = &org;
+	for (int i = -1; i < pos; i++, n = n->next)
+	{
+		if (n == NULL)
+			break;
+	}
+	return n;
+	
+}
+
+void replace(int pos, Element e)
+{
+	Node* node = get_entry(pos);
+	if (node != NULL)
+		node->data = e;
+}
+
+int size()
+{
+	Node* p;
+	int count = 0;
+	for (p = get_head(); p != NULL; p = p->next)
+	{
+		count++;
+	}
+	return count;
+}
+Node* find(Element e)
+{
+	Node* p;
+	for (p = get_head(); p != NULL; p = p->next)
+	{
+		if (p->data == e)
+			return p;
+	}
+	return NULL;
+}
+
+void print_list(char msg[])
+{
+	Node* p;
+	printf("%s[%2d]: ", msg, size());
+	for (p = get_head(); p != NULL; p = p->next)
+		printf("%2d ", p->data);
+	printf("\n");
+}
+
+void insert_next(Node *before, Node *n)
+{
+	n->prev = before;
+	n->next = before->next;
+	if (before->next != NULL)
+		before->next->prev = n;
+	before->next = n;
+}
+
+void insert(int pos, Element e)
+{
+	Node *new_node, *prev;
+
+	prev = get_entry(pos - 1);
+	if (prev != NULL)
+	{
+		new_node = (Node*)malloc(sizeof(Node));
+		new_node->data = e;
+		new_node->prev = NULL;
+		new_node->next = NULL;
+
+		insert_next(prev, new_node);
+	}
+}
+void remove_curr(Node *n)
+{
+	if (n->prev != NULL) n->prev->next = n->next;
+	if (n->next != NULL) n->next->prev = n->prev;
+}
+void Delete(int pos)
+{
+	Node *n = get_entry(pos);
+	if (n != NULL)
+	{
+		remove_curr(n);
+	}
+}
+void clear_list()
+{
+	while (is_empty() == 0)
+		Delete(0);
+}
+
+void main()
+{
+	init_list();
+	int input_number = 0;
+	int replace_number = 0;
+	int delete_number = 0;
+	int temp = 0, temp2 = 0, temp3 = 0;
+	printf("How much to put in : ");
+	scanf_s("%d", &input_number);
+	for (int i = 0; i < input_number; i++)
+	{
+		printf("Input Number : ");
+		scanf_s("%d", &temp);
+		insert(i, temp);
+	}
+	insert(size(), 1000);
+	print_list("Array List : ");
+
+	printf("Replace Location : ");
+	scanf_s("%d", &replace_number);
+	printf("Replace Value : ");
+	scanf_s("%d", &temp2);
+	replace(replace_number, temp2);
+	print_list("Array List : ");
+
+	while (1)
+	{
+		printf("Delete Location : ");
+		scanf_s("%d", &delete_number);
+		Delete(delete_number);
+		print_list("Array List");
+		printf("Anything else?(Input 0, Program Close.)");
+		scanf_s("%d", &temp3);
+		if (temp3 == 0)
+			break;
+	}
+	clear_list();
+	print_list("Default : ");
+}
