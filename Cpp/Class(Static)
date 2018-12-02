@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+
+class Kai {
+private:
+	int age;
+	static int Kai_Private;
+protected:
+	static int Kai_Protected;
+public:
+	static int Kai_Public;
+	Kai(int age) : age(age)
+	{
+		Kai_Private++;
+		Kai_Protected++;
+		Kai_Public++;
+		cout << "Kai::Kai(age) : " << Kai_Private << " - Complete" << endl;
+		cout << "Kai::Kai(age) : " << Kai_Protected << " - Complete" << endl;
+		cout << "Kai::Kai(age) : " << Kai_Public << " - Complete" << endl;
+		cout << "Age : " << this->age << endl;
+	}
+};
+int Kai::Kai_Private = 0;
+int Kai::Kai_Protected = 0;
+int Kai::Kai_Public = 0;
+
+class Eloise {
+private:
+	int age;
+public:
+	Eloise(int age) : age(age)
+	{
+		Kai::Kai_Public++; //Don't access to Kai's Private, Protected member.
+		cout << "Eloise::Eloise(age) : " << Kai::Kai_Public << " - Complete" << endl;
+		cout << "Age : " << this->age << endl;
+	}
+};
+
+int main()
+{
+	Kai kai1(28);
+	Kai kai2(29);
+	Eloise eloise1(26);
+	Eloise eloise2(27);
+	return 0;
+}
