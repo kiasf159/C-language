@@ -1,0 +1,47 @@
+#include <iostream>
+using namespace std;
+
+class Point {
+private:
+	int xpos;
+	int ypos;
+
+public:
+	Point() //The same name with Class Name = Constructor(생성자)
+	{
+		xpos = 0;
+		ypos = 0;
+	}
+	Point(int y) //Without a Constructor, Default Constructor is automatically made.
+	{
+		xpos = 1;
+		ypos = y;
+	}
+	Point(int x, int y)
+	{
+		xpos = x;
+		ypos = y;
+	}
+	~Point()
+	{
+		cout << "Default." << endl;
+	}
+
+	void print()
+	{
+		cout << "xpos : " << xpos << endl;
+		cout << "ypos : " << ypos << endl;
+	}
+};
+
+int main()
+{
+	Point pos1;
+	pos1.print();
+	cout << endl;
+	Point pos2(3);
+	pos2.print();
+	cout << endl;
+	Point pos3(10,20);
+	pos3.print();
+}
