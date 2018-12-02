@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+class X {
+private:
+	int age;
+	friend class Y;
+public:
+	X(int input) :age(input) { }
+	void Show_Age() {
+		cout << "X Age : " << age << endl;
+	}
+};
+
+class Y {
+private:
+	int age;
+	friend class X; // access to private member of another class 
+public:
+	Y(int input):age(input){ }
+	void Show_Age(X&B) {
+		cout << "X Age : " << B.age << endl;
+	}
+};
+
+int main()
+{
+	X x(20);
+	Y y(21);
+	y.Show_Age(x); //access to class x
+	x.Show_Age(); 
+}
