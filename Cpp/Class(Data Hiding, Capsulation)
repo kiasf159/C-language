@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+
+class File
+{
+public:
+	void Booting()
+	{
+		cout << "Smartphone is booting\n" << endl;
+	}
+};
+class PowerDevice
+{
+public:
+	void PowerUp()
+	{
+		cout << "Power Up\n" << endl;
+	}
+};
+class Memory
+{
+public:
+	void expand()
+	{
+		cout << "Increase Memory\n" << endl;
+	}
+};
+class Smartphone
+{
+private: // We don't need to know this.
+	File file;
+	PowerDevice powerdevice;
+	Memory memory;
+public:
+	void play()
+	{		
+		powerdevice.PowerUp();
+		memory.expand();
+		file.Booting();
+		cout << "Booting is complete.\n";
+	}
+}smartphone;
+int main()
+{
+	smartphone.play();
+}
