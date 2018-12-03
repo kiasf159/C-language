@@ -1,0 +1,131 @@
+#include <iostream>
+using namespace std;
+
+class Kai {
+public:
+	int Gvalue;
+	Kai()
+	{
+		Gvalue = 0;
+	}
+	void adder()
+	{
+		Gvalue = Gvalue + 1;
+	}
+	virtual void vAdder()
+	{
+		Gvalue = Gvalue + 10;
+	}
+	virtual void print()
+	{
+		cout << "Gvalue = " << Gvalue << endl;
+	}
+};
+
+class Eloise : virtual public Kai
+{
+public:
+	int Fvalue;
+	Eloise()
+	{
+		Fvalue = 0;
+	}
+	void adder()
+	{
+		Fvalue = Fvalue + 3;
+	}
+	virtual void vAdder()
+	{
+		Fvalue = Fvalue + 30;
+	}
+	virtual void print()
+	{
+		cout << "Fvalue = " << Fvalue << endl;
+	}
+};
+
+class Irene : virtual public Kai
+{
+public:
+	int Evalue;
+	Irene()
+	{
+		Evalue = 0;
+	}
+	void adder()
+	{
+		Evalue = Evalue + 5;
+	}
+	virtual void vAdder()
+	{
+		Evalue = Evalue + 50;
+	}
+	virtual void print()
+	{
+		cout << "Evalue = " << Evalue << endl;
+	}
+};
+
+class Edin : public Eloise, public Irene
+{
+private:
+	int Cvalue;
+public:
+	Edin()
+	{
+		Cvalue = 0;
+	}
+	void adder()
+	{
+		Cvalue = Cvalue + 7;
+	}
+	virtual void vAdder()
+	{
+		Cvalue = Cvalue + 70;
+	}
+	virtual void print()
+	{
+		cout << "Cvalue = " << Cvalue << endl;
+	}
+};
+
+int main()
+{
+	Edin C;
+	Edin *Cpointer;
+	Cpointer = &C;
+	Cpointer->adder();
+	Cpointer->vAdder(); 
+	Cpointer->print(); //77
+
+	cout << endl;
+
+	Eloise *Fpointer;
+	Fpointer = &C;
+	Fpointer->adder();
+	Fpointer->vAdder(); //Class Eloise's Pointer but vAdder is Virtual member function, real address is C = Edin, then go to Edin's vAdder();
+	((Edin*)Fpointer)->Edin::adder(); 
+	Fpointer->Eloise::vAdder();
+	Fpointer->print(); //154 - Same as before
+	Fpointer->Eloise::print(); //33
+
+	cout << endl;
+
+	Irene *Epointer;
+	Epointer = &C;
+	Epointer->adder(); 
+	Epointer->vAdder(); //Virtual Function, Real Address C = Edin
+	Epointer->Irene::vAdder();
+	Epointer->print(); //224 - Same as before
+	Epointer->Irene::print(); //55
+
+	cout << endl;
+
+	Kai *Gpointer;
+	Gpointer = &C;
+	Gpointer->adder(); 
+	Gpointer->vAdder(); //Virtual Function, Real Address C
+	Gpointer->print(); //294 - Same as before
+	Gpointer->Kai::print(); //1
+	return 0;
+}
