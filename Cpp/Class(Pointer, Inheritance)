@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+
+class Kai {
+public:
+	int Pvalue;
+	Kai()
+	{
+		Pvalue = 0;
+	}
+	void adder(int x = 0)
+	{
+		Pvalue = Pvalue + x;
+	}
+	void print()
+	{
+		cout << "Pvalue = " << Pvalue << endl;
+	}
+};
+
+class Eloise : public Kai{
+private:
+	int Cvalue;
+public:
+	Eloise()
+	{
+		Cvalue = 0;
+	}
+	void adder(int x = 0)
+	{
+		Cvalue = Cvalue + x;
+	}
+	void print()
+	{
+		cout << "Cvalue = " << Cvalue << endl;
+	}
+};
+
+int main()
+{
+	Kai P;
+	Kai *Ppointer;
+	Ppointer = &P;
+
+	Ppointer->adder(1);
+	Ppointer->print();
+
+	Eloise C;
+	Eloise *Cpointer;
+	Cpointer = &C;
+
+	Cpointer->adder(3);
+	Cpointer->print();
+	Cpointer->Kai::adder(5);
+	Cpointer->Kai::print();
+}
