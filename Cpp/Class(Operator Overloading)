@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+
+class Kai {
+private:
+	int age;
+public:
+	Kai(int age) : age(age)
+	{
+		cout << "Kai::Kai(age) is made. " << endl;
+	}
+	void introduce()
+	{
+		cout << "His age is " << age << endl;
+	}
+	Kai add(const Kai&Kai_Obj);
+	Kai sub(const Kai&Kai_Obj);
+	Kai mul(const Kai&Kai_Obj);
+	Kai div(const Kai&Kai_Obj);
+};
+
+int main()
+{
+	Kai kai1(30);
+	kai1.introduce();
+	Kai kai2(15);
+	kai2.introduce();
+	Kai addkai = kai1.add(kai2);
+	addkai.introduce();
+	Kai subkai = kai1.sub(kai2);
+	subkai.introduce();
+	Kai mulkai = kai1.mul(kai2);
+	mulkai.introduce();
+	Kai divkai = kai1.div(kai2);
+	divkai.introduce();
+}
+
+Kai Kai::add(const Kai&Kai_Obj)
+{
+	cout << "Kai::add() " << endl;
+	Kai kai(this->age + Kai_Obj.age);
+	return kai;
+}
+Kai Kai::sub(const Kai&Kai_Obj)
+{
+	cout << "Kai::sub() " << endl;
+	Kai kai(this->age - Kai_Obj.age);
+	return kai;
+}
+Kai Kai::mul(const Kai&Kai_Obj)
+{
+	cout << "Kai::mul() " << endl;
+	Kai kai(this->age * Kai_Obj.age);
+	return kai;
+}
+Kai Kai::div(const Kai&Kai_Obj)
+{
+	cout << "Kai::div() " << endl;
+	Kai kai(this->age / Kai_Obj.age);
+	return kai;
+}
