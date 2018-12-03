@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+class Kai {
+private:
+	int x, y;
+public:
+	Kai(int p1, int p2)
+	{
+		x = p1;
+		y = p2;
+	}
+	Kai operator+(Kai operand2)
+	{
+		operand2.x = this->x + operand2.x;
+		operand2.y = this->y + operand2.y;
+		return operand2;
+	}
+	void data()
+	{
+		cout << endl << "x = " << x << endl << "y = " << y;
+	}
+};
+
+int main()
+{
+	Kai A(100, 200);
+	Kai B(35, 46);
+	Kai X = A + B;
+	X.data();
+}
