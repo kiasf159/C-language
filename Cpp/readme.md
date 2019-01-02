@@ -47,4 +47,31 @@ int main()
   ProgCom::SimpleFunc();
   return 0;
 }
-</
+</code></pre>
+
+### 문제 4 - 키워드 const의 의미
+<pre><code>
+const int num = 10;
+const int *ptr1 = &val1;
+int *const ptr2 = &val2;
+const int *const ptr3 = &val3;
+</code></pre>
+
+### 문제 5 - 실행 중인 프로그램의 메모리 공간
+> 실행 중인 프로그램은 운영체제로부터 메모리 공간을 할당받는데, 이는 크게 데이터, 스택, 힙 영역으로 나뉜다. 각각의 영역에는 어떠한 형태의 변수가
+할당되는지 설명해보고. (malloc, free 포함)
+
+### 문제 6 - Call by-value vs Call by-reference
+> 함수의 호출형태는 크게 2가지로 나뉨. 값과 참조에 의한 호출. 각각의 차이는?
+
+### 4번 답
+> 변수 num을 상수화(define) / 포인터 ptr1을 이용해서 val의 값을 고정, 수정불가 / 포인터 ptr2가 상수화 / 포인터 ptr3가 상수화, ptr3를 이용해
+val3의 값을 변경할 수 없음
+
+### 5번 답 - MASM Assembly 참고
+> 데이터 세그먼트(DS) = 전역변수, 스택(Stack) = 지역변수 및 매개변수가 저장되는 영역, 힙(Heap) = 동적할당이 이뤄지는 영역(Malloc, Calloc)
+free를 하지 않으면 malloc 공간이 해제되지 않는다.
+
+### 6번 답
+> 대표적으로 Swap 함수를 사용할 때 값에 의한 호출을 할 경우 main에서 호출된 Swap 함수는 내부적으로 두 개의 숫자를 서로 바꾸지만, 그 함수를 나가는
+순간 데이터를 잃고 main 함수에 적용되지 않는다. 반면 참조에 의한 호출은 주소를 이용한 참조이므로 Swap함수를 나가더라도 main에 영향을 미친다.
