@@ -1,0 +1,42 @@
+// C code
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#pragma warning(disable:4996)
+using namespace std;
+
+char *Make_Str(int len)
+{
+	char *str = (char*)malloc(sizeof(char)*len);
+	return str;
+}
+
+int main()
+{
+	char *str = Make_Str(20);
+	strcpy(str, "I am so happy!");
+	cout << str << endl;
+	free(str);
+	return 0;
+}
+
+// C ++ code
+#include <iostream>
+#include <string.h>
+#pragma warning(disable:4996)
+using namespace std;
+
+char *Make_Str(int len)
+{
+	char *str = new char[len];
+	return str;
+}
+
+int main()
+{
+	char *str = Make_Str(20);
+	strcpy(str, "I am so happy!");
+	cout << str << endl;
+	delete []str;
+	return 0;
+}
