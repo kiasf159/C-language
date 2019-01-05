@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+#define SIZE 3
+
+struct student {
+	int number;
+	char name[20];
+	double grade;
+};
+
+int main()
+{
+	struct student list[SIZE];
+	int i;
+
+	for (i = 0; i < SIZE; i++)
+	{
+		cout << "학번 : ";
+		cin >> list[i].number;
+		cout << "이름 : ";
+		cin >> list[i].name;
+		cout << "학점 : ";
+		cin >> list[i].grade;
+	}
+	for (i = 0; i < SIZE; i++)
+	{
+		cout << list[i].number << ", " << list[i].name << ", " << list[i].grade << endl;
+	}
+}
