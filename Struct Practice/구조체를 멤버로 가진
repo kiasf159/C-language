@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+struct point
+{
+	int x;
+	int y;
+};
+
+struct rect {
+	struct point p1;
+	struct point p2;
+};
+int main()
+{
+	struct rect r;
+	int w, h, area, peri;
+
+	cout << "왼쪽 상단의 좌표 : ";
+	cin >> r.p1.x >> r.p1.y;
+	cout << "오른쪽 하단의 좌표 : ";
+	cin >> r.p2.x >> r.p2.y;
+
+	w = r.p2.x - r.p1.x;
+	h = r.p2.y - r.p1.y;
+
+	area = w * h;
+	peri = 2 * w + 2 * h;
+	cout << "면적 : " << area << " 둘레 : " << peri << endl;
+	return 0;
+}
