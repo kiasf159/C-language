@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+struct date {
+	int month;
+	int day;
+	int year;
+};
+
+struct student {
+	int number;
+	char name[20];
+	double grade;
+	struct date *dob;
+};
+
+int main()
+{
+	struct date d = { 3, 14, 1990 };
+	struct student s = { 1234, "Kai", 3.88 };
+
+	s.dob = &d;
+	cout << "학번 : " << s.number << endl;
+	cout << "이름 : " << s.name << endl;
+	cout << "학점 : " << s.grade << endl;
+	cout << "생년월일 : " << s.dob->day << " " << s.dob->month << " " << s.dob->year << endl;
+}
