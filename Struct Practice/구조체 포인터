@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+struct student {
+	int number;
+	char name[20];
+	double grade;
+};
+
+int main()
+{
+	struct student s = { 1234, "Kai", 3.88 };
+	struct student *p;
+
+	p = &s;
+
+	cout << "1. 구조체 원본 : " << s.number << " " << s.name << " " << s.grade << endl;
+	cout << "2. 포인터 사용 : " << (*p).number << " " << (*p).name << " " << (*p).grade << endl;
+	cout << "3. 구조체 포인터 사용 : " << p->number << " " << p->name << " " << p->grade;
+}
