@@ -1,6 +1,15 @@
 #include <iostream>
 using namespace std;
 
+namespace SIMPLE
+{
+	enum 
+	{
+		ID = 20,
+		MAX = 30
+	};
+}
+
 struct Point {
 	int xpos;
 	int ypos;
@@ -33,5 +42,6 @@ int main()
 
 	pos1.AddPoint(pos2);
 	pos1.ShowPosition();
+	cout << SIMPLE::ID << ", " << SIMPLE::MAX;
 	return 0;
 }
