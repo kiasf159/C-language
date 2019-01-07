@@ -24,8 +24,8 @@ namespace ProgCom
 }
 
 // Example.cpp
-#include <iostream>
-#include <Example.h>
+#include "iostream"
+#include "Example.h"
 using namespace std;
 
 void BestCom::SimpleFunc(void)
@@ -39,7 +39,7 @@ void ProgCom::SimpleFunc(void)
 }
 
 // Main.cpp
-#include <Example.h>
+#include "Example.h"
 
 int main()
 {
