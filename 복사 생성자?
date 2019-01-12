@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+class SoSimple {
+private:
+	int num;
+public:
+	SoSimple(int n)
+		:num(n)
+	{ }
+	SoSimple(const SoSimple &copy)
+		: num(copy.num)
+	{
+		cout << "First" << endl;
+	}
+	void ShowData()
+	{
+		cout << "num : " << num << endl;
+	}
+};
+
+void SimpleFuncobj(SoSimple ob)
+{
+	ob.ShowData();
+}
+
+int main()
+{
+	SoSimple obj(7);
+	cout << "Hello " << endl;
+	SimpleFuncobj(obj);
+	cout << "Hello2 " << endl;
+	return 0;
+}
