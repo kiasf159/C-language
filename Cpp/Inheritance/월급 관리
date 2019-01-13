@@ -1,0 +1,77 @@
+#include "pch.h"
+#include <iostream>
+using namespace std;
+
+//정규직 직원 월급 관리를 위한 설계(데이터)
+class Permanent_worker
+{
+private:
+	char name[100];
+	int salary;
+public:
+	Permanent_worker(const char *name, int money)
+		: salary(money)
+	{
+		strcpy(this->name, name);
+	}
+
+	int GetPay() const
+	{
+		return salary;
+	}
+
+	void ShowSalaryInfo() const
+	{
+		cout << "name: " << name << endl;
+		cout << "salary : " << GetPay() << endl << endl;
+	}
+};
+
+// 기능적 클래스(등록, 급여정보, 총액)
+class EmployeeHandler
+{
+private:
+	Permanent_worker *empList[50];
+	int empNum;
+public:
+	EmployeeHandler()
+		: empNum(0)
+	{  }
+	void AddEmployee(Permanent_worker *emp)
+	{
+		empList[empNum++] = emp;
+	}
+	void ShowAllSalaryInfo() const
+	{
+		for (int i = 0; i < empNum; i++)
+			empList[i]->ShowSalaryInfo();
+	}
+	void ShowTotalSalary() const
+	{
+		int sum = 0;
+		for (int i = 0; i < empNum; i++)
+			sum = sum + empList[i]->GetPay();
+		cout << "Salary Sum : " << sum << endl;
+	}
+	~EmployeeHandler()
+	{
+		for (int i = 0; i < empNum; i++)
+			delete empList[i];
+	}
+};
+int main()
+{
+	//직원관리를 목적으로 설계된 컨트롤 클래스의 객체생성
+	EmployeeHandler handler;
+
+	//직원 등록
+	handler.AddEmployee(new Permanent_worker("Emile", 247)); //생성자의 인스턴스가 없습니다. -> 12번째 줄 [const] char *name 필요
+	handler.AddEmployee(new Permanent_worker("Taylor", 302));
+  handler.AddEmployee(new Permanent_worker("Kai", 278));
+
+	//이번 달에 지불해야 할 급여의 정보
+	handler.ShowAllSalaryInfo();
+
+	//이번 달에 지불해야 할 급여의 총합
+	handler.ShowTotalSalary();
+}
