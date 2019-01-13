@@ -30,3 +30,54 @@ int main()
 	y.Show_Age(x); //access to class x
 	x.Show_Age(); 
 }
+
+// 
+#include <iostream>
+#include <cstring>
+#pragma warning(disable:4996)
+using namespace std;
+
+class Girl;
+
+class Boy
+{
+private:
+	int height;
+	friend class Girl;
+public:
+	Boy(int len)
+		: height(len)
+	{ 	}
+	void ShowYourFriendInfo(Girl &frn);
+};
+
+class Girl
+{
+private:
+	int height;
+public:
+	Girl(int len)
+		: height(len)
+	{   }
+	void ShowYourFriendInfo(Boy &frn);
+	friend class Boy;
+};
+
+void Boy::ShowYourFriendInfo(Girl &frn)
+{
+	cout << "Her height : " << frn.height << endl;
+}
+
+void Girl::ShowYourFriendInfo(Boy &frn)
+{
+	cout << "His height : " << frn.height << endl;
+}
+
+int main()
+{
+	Boy boy(180);
+	Girl girl(165);
+	boy.ShowYourFriendInfo(girl);
+	girl.ShowYourFriendInfo(boy);
+	return 0;
+}
