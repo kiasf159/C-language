@@ -1,0 +1,122 @@
+// 대학생 개인정보
+#include "pch.h"
+#include <iostream>
+#include <cstring>
+#pragma warning(disable:4996)
+using namespace std;
+
+class Person
+{
+private:
+	int age;
+	char name[50];
+public:
+	Person(int my_age, const char *my_name)
+		: age(my_age)
+	{
+		strcpy(name, my_name);
+	}
+	void What_your_name() const
+	{
+		cout << "My name is " << name << endl;
+	}
+	void How_old_are_you() const
+	{
+		cout << "I'm " << age << " years old." << endl;
+	}
+};
+
+class UnivStudent : public Person
+{
+private:
+	char major[50];
+public:
+	UnivStudent(const char *my_name, int my_age, const char *my_major)
+		:Person(my_age, my_name)
+	{
+		strcpy(major, my_major);
+	}
+	void Who_are_you() const
+	{
+		What_your_name();
+		How_old_are_you();
+		cout << "My major is " << major << endl << endl;
+	}
+};
+
+int main()
+{
+	UnivStudent univ("Williams", 22, "Computer Eng.");
+	univ.Who_are_you();
+
+	UnivStudent univ2("Daniel", 24, "Economics");
+	univ2.Who_are_you();
+}
+
+//유도 클래스(Derived Class)의 객체 생성과정 - 자식 클래스의 초기값을 부르면 부모 클래스 초기값이 먼저 나온다!
+#include "pch.h"
+#include <iostream>
+#include <cstring>
+#pragma warning(disable:4996)
+using namespace std;
+
+class SoBase
+{
+private:
+	int baseNum;
+public:
+	SoBase()
+		:baseNum(20)
+	{
+		cout << "call SoBase()" << endl;
+	}
+	SoBase(int n)
+		:baseNum(n)
+	{
+		cout << "call SoBase(int n)" << endl;
+	}
+	void ShowBaseData()
+	{
+		cout << baseNum << endl;
+	}
+};
+
+class SoDerived : public SoBase
+{
+private:
+	int derivNum;
+public:
+	SoDerived()
+		: derivNum(30)
+	{
+		cout << "call SoDerived()" << endl;
+	}
+	SoDerived(int n)
+		: derivNum(n)
+	{
+		cout << "call SoDerived(int n)" << endl;
+	}
+	SoDerived(int n1, int n2)
+		: SoBase(n1), derivNum(n2)
+	{
+		cout << "call SoDerived(int n1, int n2)" << endl;
+	}
+	void ShowDerivData()
+	{
+		ShowBaseData();
+		cout << derivNum << endl;
+	}
+};
+
+int main()
+{
+	cout << "Case 1" << endl;
+	SoDerived d1;
+	d1.ShowDerivData();
+	cout << "Case 2" << endl;
+	SoDerived d2(12);
+	d2.ShowDerivData();
+	cout << "Case 3" << endl;
+	SoDerived d3(23, 24);
+	d3.ShowDerivData();
+}
