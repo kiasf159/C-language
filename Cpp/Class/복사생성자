@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+int simobjcnt = 0;
+int cmxobjcnt = 0;
+
+class So_simple
+{
+public:
+	So_simple()
+	{
+		simobjcnt++;
+		cout << simobjcnt << "번째 SoSimple 객체" << endl;
+	}
+};
+
+class So_complex
+{
+public:
+	So_complex()
+	{
+		cmxobjcnt++;
+		cout << cmxobjcnt << "번째 SoComplex 객체" << endl;
+	}
+
+	So_complex(So_complex &copy)
+	{
+		cmxobjcnt++;
+		cout << cmxobjcnt << "번째 SoComplex(copy) 객체" << endl;
+	}
+};
+
+int main()
+{
+	So_simple sim1;
+	So_simple sim2;
+
+	So_complex com1;
+	So_complex com2(com1);
+	So_complex();
+}
