@@ -1,3 +1,4 @@
+// Section 1 -------------------------------------------------------------
 #include <iostream>
 using namespace std;
 
@@ -38,4 +39,77 @@ int main()
 	So_complex com1;
 	So_complex com2(com1);
 	So_complex();
+}
+
+//Section 2 -----------------------------------------------------------------
+#include <iostream>
+using namespace std;
+
+class So_simple
+{
+private:
+	static int simobjcnt;
+public:
+	So_simple()
+	{
+		simobjcnt++;
+		cout << simobjcnt << "번째 SoSimple 객체" << endl;
+	}
+};
+int So_simple::simobjcnt = 0; //위에는 단순히 void 함수에서 선언되었으므로 초기화가 되지만,
+// 여기는 클래스 내부에서 선언된 static 멤버변수이므로 
+
+class So_complex
+{
+private:
+	static int cmxobjcnt;
+public:
+	So_complex()
+	{
+		cmxobjcnt++;
+		cout << cmxobjcnt << "번째 SoComplex 객체" << endl;
+	}
+
+	So_complex(So_complex &copy)
+	{
+		cmxobjcnt++;
+		cout << cmxobjcnt << "번째 SoComplex(copy) 객체" << endl;
+	}
+};
+int So_complex::cmxobjcnt = 0;
+
+int main()
+{
+	So_simple sim1;
+	So_simple sim2;
+
+	So_complex com1;
+	So_complex com2(com1);
+	So_complex();
+}
+
+//Section 3 ************************************************************************
+#include <iostream>
+using namespace std;
+
+class So_simple
+{
+public:
+	static int simobjcnt;
+	So_simple()
+	{
+		simobjcnt++;
+	}
+};
+int So_simple::simobjcnt = 0;
+
+int main()
+{
+	cout << So_simple::simobjcnt << "번째 So_simple 객체" << endl;
+	So_simple sim1;
+	So_simple sim2;
+
+	cout << So_simple::simobjcnt << "번째 So_simple 객체" << endl;
+	cout << sim1.simobjcnt << "번째 So_simple 객체" << endl;
+	cout << sim2.simobjcnt << "번째 So_simple 객체" << endl;
 }
