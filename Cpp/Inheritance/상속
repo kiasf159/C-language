@@ -120,3 +120,67 @@ int main()
 	SoDerived d3(23, 24);
 	d3.ShowDerivData();
 }
+
+//상속 + 생성자 + 소멸자 구성
+#include "pch.h"
+#include <iostream>
+#include <cstring>
+#pragma warning(disable:4996)
+using namespace std;
+
+class MyFriendInfo
+{
+private:
+	char *name;
+	int age;
+public:
+	MyFriendInfo(const char *name, int age)
+		: age(age)
+	{
+		this->name = new char[strlen(name) + 1];
+		strcpy(this->name, name);
+	}
+	void ShowMyFriendInfo()
+	{
+		cout << "이름 : " << name << endl;
+		cout << "나이 : " << age << endl;
+	}
+	~MyFriendInfo()
+	{
+		delete[]this->name;
+	}
+
+};
+
+class MyFriendDetailInfo : public MyFriendInfo
+{
+private:
+	char *addr;
+	char *phone;
+public:
+	MyFriendDetailInfo(const char *name, int age, const char *addr, const char *phone)
+		: MyFriendInfo(name, age)
+	{
+		this->addr = new char[strlen(addr) + 1];
+		this->phone = new char[strlen(phone) + 1];
+		strcpy(this->addr, addr);
+		strcpy(this->phone, phone);
+	}
+	void ShowMyDetailfriendInfo()
+	{
+		ShowMyFriendInfo();
+		cout << "주소 : " << addr << endl;
+		cout << "전화 : " << phone << endl;
+	}
+	~MyFriendDetailInfo()
+	{
+		delete[]this->addr;
+		delete[]this->phone;
+	}
+};
+
+int main()
+{
+	MyFriendDetailInfo info("Kai", 22, "Seoul", "7477");
+	info.ShowMyDetailfriendInfo();
+}
