@@ -184,3 +184,58 @@ int main()
 	MyFriendDetailInfo info("Kai", 22, "Seoul", "7477");
 	info.ShowMyDetailfriendInfo();
 }
+
+//private, protected, public 상속의 차이
+#include "pch.h"
+#include <iostream>
+#include <cstring>
+#pragma warning(disable:4996)
+using namespace std;
+
+class A
+{
+private:
+	int a;
+protected:
+	int b;
+public:
+	int c;
+};
+
+class B : protected A
+{
+public:
+	void Show()
+	{
+		cout << a; 
+		cout << b;
+		cout << c;
+	}
+};
+
+class C : private A
+{
+public:
+	void Show()
+	{
+		cout << a;
+		cout << b;
+		cout << c;
+	}
+};
+
+int main()
+{
+	A classA;
+	classA.a; //private 접근 불가
+	classA.b; //protected 접근 불가, 단 protected는 상속된 클래스에서는 접근 가능
+	classA.c;
+	B classB;
+	classB.a; //private
+	classB.b; //protected
+	classB.c; //protected = 상속이 protected로 됐기 때문
+	C classC;
+	classC.a; //private
+	classC.b; //private
+	classC.c; //private
+}
