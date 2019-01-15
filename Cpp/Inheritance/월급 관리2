@@ -1,0 +1,174 @@
+#include "pch.h"
+#include <iostream>
+#include <cstring>
+#pragma warning(disable:4996)
+using namespace std;
+/* virtual을 사용할 경우 자료형에 따라 호출대상을 결정하지 않고, 포인터 변수가
+실제로 가리키는 객체를 참조하여 호출의	대상을 결정한다. */
+class Employee
+{
+private:
+	char name[100];
+public:
+	Employee(const char *name)
+	{
+		strcpy(this->name, name);
+	}
+
+	void Show_Your_Name() const
+	{
+		cout << "Name : " << name << endl;
+	}
+
+	virtual int Get_Pay() const
+	{
+		return 0;
+	}
+
+	virtual void Show_Salary_Info() const
+	{  }
+};
+
+// 정규직
+class PermanentWorker : public Employee
+{
+private:
+	int salary;
+public:
+	PermanentWorker(const char *name, int money)
+		: Employee(name), salary(money)
+	{   }
+
+	int Get_Pay() const
+	{
+		return salary;
+	}
+
+	void Show_Salary_Info() const
+	{
+		Show_Your_Name();
+		cout << "Salary : " << Get_Pay() << endl << endl;
+	}
+};
+
+// 임시직 급여 = 시간당 급여 x 일한 시간
+class TemporaryWorker : public Employee
+{
+private:
+	int WorkTime;
+	int PayPerHour;
+public:
+	TemporaryWorker(const char *name, int pay)
+		: Employee(name), WorkTime(0), PayPerHour(pay)
+	{	}
+
+	void Add_WorkTime(int time)
+	{
+		this->WorkTime = this->WorkTime + time;
+	}
+
+	int Get_Pay() const
+	{
+		return WorkTime * PayPerHour;
+	}
+
+	void Show_Salary_Info() const
+	{
+		Show_Your_Name();
+		cout << "Salary : " << Get_Pay() << endl << endl;
+	}
+};
+
+class Sales_Worker : public PermanentWorker
+{
+private:
+	int salesResult; //월 판매실적
+	double bonusRatio; //상여금 비율
+public:
+	Sales_Worker(const char *name, int money, double ratio)
+		: PermanentWorker(name, money), salesResult(0), bonusRatio(ratio)
+	{   }
+
+	void Add_Sales_Result(int value)
+	{
+		salesResult = salesResult + value;
+	}
+
+	// PermanentWorker의 Get_Pay 함수 호출
+	int Get_Pay() const
+	{
+		return PermanentWorker::Get_Pay() + (int)(salesResult*bonusRatio);
+	}
+
+	// Sales_Worker의 Get_Pay 함수 호출
+	void Show_Salary_Info() const
+	{
+		Show_Your_Name();
+		cout << "Salary : " << Get_Pay() << endl << endl;
+	}
+};
+
+//기능적 컨트롤 클래스
+class EmployeeHandler
+{
+private:
+	Employee *emplist[50];
+	int empNum;
+public:
+	EmployeeHandler()
+		:empNum(0)
+	{	}
+
+	void Add_Employee(Employee *emp)
+	{
+		emplist[empNum++] = emp;
+	}
+
+	void Show_All_Salary_Info() const
+	{
+		
+		for(int i = 0; i < empNum; i++)
+			emplist[i]->Show_Salary_Info();
+		
+	}
+
+	void Show_Total_Salary() const
+	{
+		int sum = 0;
+		for(int i = 0; i < empNum; i++)
+			sum = sum + emplist[i]->Get_Pay();
+		cout << "Salary Sum : " << sum << endl;
+	}
+	~EmployeeHandler()
+	{
+		for (int i = 0; i < empNum; i++)
+			delete emplist[i];
+	}
+};
+
+int main()
+{
+	//직원관리를 목적으로 설계된 컨트롤 클래스의 객체 생성
+	EmployeeHandler handler;
+
+	//정규직 등록
+	handler.Add_Employee(new PermanentWorker("Heroine", 1000));
+	handler.Add_Employee(new PermanentWorker("Daniel", 1500));
+	handler.Add_Employee(new PermanentWorker("Jordan", 2000));
+
+	//파트타임 등록
+	TemporaryWorker *alba = new TemporaryWorker("Brown", 80);
+	alba->Add_WorkTime(5);
+	handler.Add_Employee(alba);
+
+	//영업직 등록
+	Sales_Worker *seller = new Sales_Worker("Catherine", 500, 0.1);
+	seller->Add_Sales_Result(1500);
+	handler.Add_Employee(seller);
+
+	//이번 달에 지불해야 할 급여의 정보
+	handler.Show_All_Salary_Info();
+
+	//이번 달에 지불해야 할 급여의 총합
+	handler.Show_Total_Salary();
+}
