@@ -1,0 +1,89 @@
+/*
+상속 : 어느 클래스에서 확장된/상속된 클래스가 더 나은 행동을 하도록 제공하는 것
+다형성 : 객체지향 프로그래밍의 특징 중 하나이며, 하나의 행동을 여러 방법으로 구현하고 상황에 따라
+적당한 구현을 선택해서 쓸 수 있도록 해주는 기능을 제공한다.
+즉, 1개의 타입의 참조 변수(Pointer)는 여러 타입의 객체를 참조할 수 있다.
+Java 에서는 오버로딩(Overloading), 오버라이딩(Overriding)이 대표적
+<오버로딩>
+같은 메서드 이름, 다른 인자 목록에서 다수의 메서드를 중복 정의
+하나의 클래스 안에서 같은 이름의 메서드를 사용하지만 각 메서드마다 다른 용도
+(함수 이름은 같지만 매개변수의 갯수 차이, 데이터 타입의 차이 등이 있다.)
+<오버라이딩>
+같은 메서드 이름, 같은 인자 목록에서 상위 클래스의 메서드를 재정의
+부모클래스에서 상속받은 서브클래스(자식)에서 상위클래스 메서드를 자신의 입맛대로 다시 재창조해서 사용하는 것
+(클래스 별로 동일한 이름의 함수를 정의하는 것)
+*/
+#include "pch.h"
+#include <iostream>
+#include <cstring>
+#pragma warning(disable:4996)
+using namespace std;
+
+class First
+{
+public:
+	void FirstFunc()
+	{
+		cout << "FirstFunc()" << endl;
+	}
+
+	virtual void SimpleFunc()
+	{
+		cout << "First's SimpleFunc()" << endl;
+	}
+};
+
+class Second : public First
+{
+public:
+	void SecondFunc()
+	{
+		cout << "SecondFunc()" << endl;
+	}
+	
+	void SimpleFunc()
+	{
+		cout << "Second's SimpleFunc()" << endl;
+	}
+};
+
+class Third : public Second
+{
+public:
+	void ThirdFunc()
+	{
+		cout << "ThirdFunc()" << endl;
+	}
+
+	void SimpleFunc()
+	{
+		cout << "Third's SimpleFunc()" << endl;
+	}
+};
+/*
+First 객체 또는 First를 직/간접적으로 상속하는 클래스의
+객체가 인자의 대상이 된다. 
+인자로 전달되는 객체의 실제 자료형에 관계없이 함수 내에서는
+First 클래스에 정의된 함수만 호출할 수 있다.
+*/
+int main()
+{
+	Third obj;
+	obj.FirstFunc();
+	obj.SecondFunc();
+	obj.ThirdFunc();
+	obj.SimpleFunc();
+
+	Second &ref = obj;
+	ref.FirstFunc();
+	ref.SecondFunc();
+	ref.SimpleFunc();
+
+	First &ref2 = obj;
+	ref2.FirstFunc();
+	ref2.SimpleFunc();
+
+	cout << " ------ --- ";
+	First *ptr = new Third();
+	ptr->SimpleFunc();
+}
