@@ -3,35 +3,49 @@
 #pragma warning(disable:4996)
 using namespace std;
 
-class Point
+class Kai
 {
 private:
-	int xpos, ypos;
+	int xpoint, ypoint;
 public:
-	Point(int x = 0, int y = 0)
-		:xpos(x), ypos(y)
-	{   }
+	Kai(int i = 0, int j = 0)
+		:xpoint(i), ypoint(j)
+	{  	}
 
-	void ShowPosition() const
+	void Showposition()
 	{
-		cout << xpos << ", " << ypos << endl;
+		cout << xpoint << ", " << ypoint << endl;
 	}
-	friend Point operator+(const Point &pos1, const Point &pos2);
+
+	Kai operator-(const Kai &ref)
+	{
+		Kai kai(xpoint - ref.xpoint, ypoint - ref.ypoint);
+		return kai;
+	}
+	friend Kai operator-(const Kai &ref1, const Kai &ref2);
 };
 
-Point operator+(const Point &pos1, const Point &pos2)
+Kai operator-(const Kai &ref1, const Kai &ref2)
 {
-	Point pos(pos1.xpos + pos2.xpos, pos1.ypos + pos2.ypos);
-	return pos;
+	Kai kai(ref1.xpoint - ref2.xpoint, ref1.ypoint - ref2.ypoint);
+	return kai;
 }
 
 int main()
 {
-	Point pos1(3, 4);
-	Point pos2(10, 20);
-	Point pos3 = operator+(pos1, pos2);
+	Kai kai1(100, 200);
+	Kai kai2(25, 75);
+	Kai kai3 = kai1.operator-(kai2);
 
-	pos1.ShowPosition();
-	pos2.ShowPosition();
-	pos3.ShowPosition();
+	kai1.Showposition();
+	kai2.Showposition();
+	kai3.Showposition();
+
+	Kai kai4(150, 300);
+	Kai kai5(90, 170);
+	Kai kai6 = operator-(kai4, kai5);
+
+	kai4.Showposition();
+	kai5.Showposition();
+	kai6.Showposition();
 }
