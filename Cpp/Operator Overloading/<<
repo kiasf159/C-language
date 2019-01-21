@@ -1,0 +1,29 @@
+#include "pch.h"
+#include <iostream>
+#pragma warning(disable:4996)
+using namespace std;
+
+class Kai
+{
+private:
+	int xpoint, ypoint;
+public:
+	Kai(int x = 0, int y = 0)
+		: xpoint(x), ypoint(y)
+	{   }
+
+	friend ostream& operator << (ostream&, const Kai&);
+};
+
+ostream& operator <<(ostream &os, const Kai &ref)
+{
+	os << ref.xpoint << ", " << ref.ypoint << endl;
+	return os;
+}
+
+int main()
+{
+	Kai kai(1, 3);
+	cout << kai;
+	
+}
