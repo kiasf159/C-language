@@ -1,0 +1,64 @@
+#include "pch.h"
+#include <iostream>
+#pragma warning(disable:4996)
+using namespace std;
+
+class Kai
+{
+private:
+	int xpoint, ypoint;
+public:
+	Kai(int x = 0, int y = 0)
+		:xpoint(x), ypoint(y)
+	{	}
+
+	void ShowPosition()
+	{
+		cout << xpoint << ", " << ypoint << endl;
+	}
+
+	Kai &operator++() //전위 증가
+	{
+		xpoint += 1;
+		ypoint += 1;
+		return *this;
+	}
+
+	const Kai operator++(int) // 후위 증가
+	{
+		const Kai retobj(xpoint, ypoint);
+		xpoint += 1;
+		ypoint += 1;
+		return retobj;
+	}
+	friend Kai &operator--(Kai &ref);
+	friend const Kai operator--(Kai &ref, int);
+};
+
+Kai &operator--(Kai &ref) // 전위 감소
+{
+	ref.xpoint -= 1;
+	ref.ypoint -= 1;
+	return ref;
+}
+
+const Kai operator--(Kai &ref, int) // 후위 감소
+{
+	const Kai retobj(ref);
+	ref.xpoint -= 1;
+	ref.ypoint -= 1;
+	return retobj;
+}
+
+int main()
+{
+	Kai kai1(3, 5);
+	Kai kai2;
+	kai2 = kai1--;
+	kai2.ShowPosition();
+	kai1.ShowPosition();
+
+	kai2 = kai1++;
+	kai2.ShowPosition();
+	kai1.ShowPosition();
+}
