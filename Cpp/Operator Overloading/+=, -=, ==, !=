@@ -1,0 +1,81 @@
+#include "pch.h"
+#include <iostream>
+#pragma warning(disable:4996)
+using namespace std;
+
+class Kai
+{
+private:
+	int xpoint, ypoint;
+public:
+	Kai(int x = 0, int y = 0)
+		:xpoint(x), ypoint(y)
+	{	}
+
+	void Showposition() const
+	{
+		cout << xpoint << ", " << ypoint << endl;
+	}
+
+	Kai operator+= (const Kai &ref)
+	{
+		xpoint += ref.xpoint;
+		ypoint += ref.ypoint;
+		return *this;
+	}
+
+	Kai operator-= (const Kai &ref)
+	{
+		xpoint -= ref.xpoint;
+		ypoint -= ref.ypoint;
+		return *this;
+	}
+	friend Kai operator-(const Kai &, const Kai &);
+	friend bool operator==(const Kai &, const Kai &);
+	friend bool operator!=(const Kai &, const Kai &);
+};
+
+Kai operator-(const Kai &ref1, const Kai &ref2)
+{
+	Kai kai(ref1.xpoint - ref2.xpoint, ref1.ypoint - ref2.ypoint);
+	return kai;
+}
+
+bool operator==(const Kai &ref1, const Kai &ref2)
+{
+	if (ref1.xpoint == ref2.xpoint && ref1.ypoint == ref2.ypoint)
+		return true;
+	else
+		return false;
+}
+
+bool operator!=(const Kai &ref1, const Kai &ref2)
+{
+	return !(ref1 == ref2); //오버로딩 된 == 연산자를 호출하고 있다.
+}
+
+int main()
+{
+	Kai kai1(20, 30);
+	Kai kai2(9, 12);
+	Kai kai3(9, 12);
+	// 뺄셈
+	(kai1 - kai2).Showposition(); //반환형이 *this, 참조형이므로 함수 호출 가능.
+	Kai kai4 = operator-(kai1, kai2);
+	kai4.Showposition();
+
+	(kai2 += kai3).Showposition(); //반환형이 *this, 참조형이므로 함수 호출 가능.
+
+	if (kai2 == kai3)
+		cout << "Equal" << endl;
+	else
+		cout << "Not equal" << endl;
+	cout << endl;
+	kai2.Showposition();
+	(kai2 -= kai3).Showposition();
+
+	if (kai2 != kai3)
+		cout << "Not equal" << endl;
+	else
+		cout << "Equal" << endl;
+}
