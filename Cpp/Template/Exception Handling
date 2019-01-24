@@ -1,0 +1,27 @@
+#include "pch.h"
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	while (1)
+	{
+		int num1, num2;
+		cout << "나눗셈 숫자 1, 2( 1 나누기 2 ) : ";
+		cin >> num1 >> num2;
+		try
+		{
+			if (num2 == 0)
+				throw num2;
+			cout << "나눗셈의 몫 : " << num1 / num2 << endl;
+			cout << "나머지 : " << num1 % num2 << endl;
+			break;
+		}
+		catch (int expn)
+		{
+			cout << "나누는 값이 " << expn << "이 될 수 없습니다. \n프로그램을 재시작합니다." << endl;
+		}
+	}
+	cout << "End of main" << endl;
+	return 0;
+}
