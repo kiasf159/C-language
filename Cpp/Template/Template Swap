@@ -1,0 +1,46 @@
+#include "pch.h"
+#include <iostream>
+using namespace std;
+
+class Point
+{
+private:
+	int xpos, ypos;
+public:
+	Point(int x = 0, int y = 0)
+		:xpos(x), ypos(y)
+	{	}
+
+	void Show_Position() const
+	{
+		cout << xpos << ", " << ypos << endl;
+	}
+
+	void Swap(int &xpos, int &ypos)
+	{
+		int temp = xpos;
+		xpos = ypos;
+		ypos = temp;
+	}
+};
+
+template <typename T>
+void swapdata(T &data1, T &data2)
+{
+	T tmp = data1; 
+	data1 = data2;
+	data2 = tmp;
+}
+
+
+int main()
+{
+	Point point1(3, 5);
+	Point point2(5, 10);
+	point1.Show_Position();
+	point2.Show_Position();
+	cout << endl;
+	swapdata(point1, point2);
+	point1.Show_Position();
+	point2.Show_Position();
+}
